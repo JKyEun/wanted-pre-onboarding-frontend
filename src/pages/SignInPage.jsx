@@ -79,7 +79,7 @@ export default function SignInPage() {
         <button
           type='submit'
           disabled={!isEmailValid || !isPasswordValid}
-          data-testid='signup-button'
+          data-testid='signin-button'
         >
           로그인
         </button>

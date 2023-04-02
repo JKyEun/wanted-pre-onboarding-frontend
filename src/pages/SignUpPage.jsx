@@ -1,35 +1,24 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export default function SignUpPage() {
   const navigate = useNavigate();
   const emailInput = useRef('');
   const passwordInput = useRef('');
-  const submitButton = useRef();
-  let isEmailValid = false;
-  let isPasswordValid = false;
+  const [isEmailValid, setIsEmailValid] = useState(false);
+  const [isPasswordValid, setIsPasswordValid] = useState(false);
 
-  const checkEmailInput = () => {
+  const checkInputs = () => {
     if (emailInput.current.value.includes('@')) {
-      isEmailValid = true;
-      removeDisabled();
+      setIsEmailValid(true);
     } else {
-      isEmailValid = false;
+      setIsEmailValid(false);
     }
-  };
 
-  const checkPasswordInput = () => {
     if (passwordInput.current.value.length >= 8) {
-      isPasswordValid = true;
-      removeDisabled();
+      setIsPasswordValid(true);
     } else {
-      isPasswordValid = false;
-    }
-  };
-
-  const removeDisabled = () => {
-    if (isEmailValid && isPasswordValid) {
-      submitButton.current.disabled = false;
+      setIsPasswordValid(false);
     }
   };
 
@@ -52,8 +41,7 @@ export default function SignUpPage() {
       );
 
       if (res.status === 201) {
-        const data = await res.text();
-        console.log(data);
+        console.log('회원가입 성공');
         navigate('/signin');
       } else {
         console.log(`요청실패, status는 ${res.status}`);
@@ -76,18 +64,22 @@ export default function SignUpPage() {
         <input
           type='email'
           ref={emailInput}
-          onChange={checkEmailInput}
+          onChange={checkInputs}
           placeholder='이메일을 입력하세요'
           data-testid='email-input'
         />
         <input
           type='password'
           ref={passwordInput}
-          onChange={checkPasswordInput}
+          onChange={checkInputs}
           placeholder='비밀번호를 입력하세요'
           data-testid='password-input'
         />
-        <button ref={submitButton} disabled={true} data-testid='signup-button'>
+        <button
+          type='submit'
+          disabled={!isEmailValid || !isPasswordValid}
+          data-testid='signup-button'
+        >
           회원가입
         </button>
       </form>

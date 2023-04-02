@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export default function SignUp() {
+export default function SignIn() {
   const navigate = useNavigate();
   const emailInput = useRef('');
   const passwordInput = useRef('');
@@ -43,7 +43,7 @@ export default function SignUp() {
 
     try {
       const res = await fetch(
-        'https://pre-onboarding-selection-task.shop/auth/signup',
+        'https://pre-onboarding-selection-task.shop/auth/signin',
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -51,10 +51,10 @@ export default function SignUp() {
         }
       );
 
-      if (res.status === 201) {
+      if (res.status === 200) {
         const data = await res.text();
         console.log(data);
-        navigate('/signin');
+        navigate('/todo');
       } else {
         console.log(`요청실패, status는 ${res.status}`);
       }
@@ -65,7 +65,7 @@ export default function SignUp() {
 
   return (
     <div>
-      <h1>회원 가입</h1>
+      <h1>로그인</h1>
       <form onSubmit={addAccount}>
         <input
           type='email'
@@ -82,7 +82,7 @@ export default function SignUp() {
           data-testid='password-input'
         />
         <button ref={submitButton} disabled={true} data-testid='signup-button'>
-          회원가입
+          로그인
         </button>
       </form>
     </div>

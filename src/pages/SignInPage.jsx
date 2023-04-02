@@ -61,7 +61,7 @@ export default function SignInPage() {
   return (
     <>
       <h1>로그인</h1>
-      <form onSubmit={login}>
+      <form onSubmit={login} className='sign-form'>
         <input
           type='email'
           ref={emailInput}
@@ -77,6 +77,7 @@ export default function SignInPage() {
           data-testid='password-input'
         />
         <button
+          className='btn'
           type='submit'
           disabled={!isEmailValid || !isPasswordValid}
           data-testid='signin-button'

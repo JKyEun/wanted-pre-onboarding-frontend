@@ -72,7 +72,7 @@ export default function TodoListPage() {
 
   const logout = () => {
     localStorage.removeItem('JWT');
-    navigate('/signin');
+    navigate('/');
   };
 
   useEffect(() => {
@@ -98,16 +98,18 @@ export default function TodoListPage() {
         />
         <button data-testid='new-todo-add-button'>추가</button>
       </form>
-      {todos.map((el) => (
-        <TodoList
-          key={el.id}
-          id={el.id}
-          todo={el.todo}
-          isCompleted={el.isCompleted}
-          setTodos={setTodos}
-          todos={todos}
-        />
-      ))}
+      <>
+        {todos.map((el) => (
+          <TodoList
+            key={el.id}
+            id={el.id}
+            todo={el.todo}
+            isCompleted={el.isCompleted}
+            setTodos={setTodos}
+            todos={todos}
+          />
+        ))}
+      </>
       <button onClick={logout}>로그아웃</button>
     </>
   );

@@ -60,7 +60,7 @@ export default function SignUpPage() {
   return (
     <>
       <h1>회원 가입</h1>
-      <form onSubmit={addAccount}>
+      <form onSubmit={addAccount} className='sign-form'>
         <input
           type='email'
           ref={emailInput}
@@ -76,6 +76,7 @@ export default function SignUpPage() {
           data-testid='password-input'
         />
         <button
+          className='btn'
           type='submit'
           disabled={!isEmailValid || !isPasswordValid}
           data-testid='signup-button'

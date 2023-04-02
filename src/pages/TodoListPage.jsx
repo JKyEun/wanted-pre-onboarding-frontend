@@ -70,6 +70,11 @@ export default function TodoListPage() {
     }
   };
 
+  const logout = () => {
+    localStorage.removeItem('JWT');
+    navigate('/signin');
+  };
+
   useEffect(() => {
     // 마운트 시에 TodoList를 가져온다.
     getTodo();
@@ -103,6 +108,7 @@ export default function TodoListPage() {
           todos={todos}
         />
       ))}
+      <button onClick={logout}>로그아웃</button>
     </>
   );
 }

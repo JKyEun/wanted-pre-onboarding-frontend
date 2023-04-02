@@ -1,9 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import TodoList from '../components/TodoList';
 
 export default function TodoListPage() {
   const todoInput = useRef('');
   const [todos, setTodos] = useState([]);
+  const navigate = useNavigate();
 
   const createTodo = async (e) => {
     e.preventDefault();
@@ -72,6 +74,12 @@ export default function TodoListPage() {
     // 마운트 시에 TodoList를 가져온다.
     getTodo();
   }, []);
+
+  useEffect(() => {
+    if (localStorage.getItem('JWT') === null) {
+      navigate('/signin');
+    }
+  });
 
   return (
     <>

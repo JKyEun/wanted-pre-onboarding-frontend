@@ -1,8 +1,9 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Home from './components/Home';
-import SignIn from './components/SignIn';
-import SignUp from './components/SignUp';
+import Home from './pages/Home';
+import SignInPage from './pages/SignInPage';
+import SignUpPage from './pages/SignUpPage';
+import TodoListPage from './pages/TodoListPage';
 
 function App() {
   return (
@@ -10,8 +11,9 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/signup' element={<SignUp />} />
-          <Route path='/signin' element={<SignIn />} />
+          <Route path='/signup' element={<SignUpPage />} />
+          <Route path='/signin' element={<SignInPage />} />
+          <Route path='/todo' element={<TodoListPage />} />
         </Routes>
       </BrowserRouter>
     </div>

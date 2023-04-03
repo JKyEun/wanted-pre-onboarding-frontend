@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 
 export default function TodoList({ id, todo, isCompleted, setTodos, todos }) {
+  const { API_URL } = process.env;
   const checkBox = useRef();
   const todoSpan = useRef();
   const modifyInput = useRef('');
@@ -16,17 +17,14 @@ export default function TodoList({ id, todo, isCompleted, setTodos, todos }) {
     const accessToken = JSON.parse(localStorage.getItem('JWT')).access_token;
 
     try {
-      const res = await fetch(
-        `https://pre-onboarding-selection-task.shop/todos/${id}`,
-        {
-          method: 'PUT',
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(todo),
-        }
-      );
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/todos/${id}`, {
+        method: 'PUT',
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(todo),
+      });
 
       if (res.status === 200) {
         const data = await res.json();
@@ -44,15 +42,12 @@ export default function TodoList({ id, todo, isCompleted, setTodos, todos }) {
     const accessToken = JSON.parse(localStorage.getItem('JWT')).access_token;
 
     try {
-      const res = await fetch(
-        `https://pre-onboarding-selection-task.shop/todos/${id}`,
-        {
-          method: 'DELETE',
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
-      );
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/todos/${id}`, {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
 
       if (res.status === 204) {
         console.log('성공');
@@ -75,17 +70,14 @@ export default function TodoList({ id, todo, isCompleted, setTodos, todos }) {
     const accessToken = JSON.parse(localStorage.getItem('JWT')).access_token;
 
     try {
-      const res = await fetch(
-        `https://pre-onboarding-selection-task.shop/todos/${id}`,
-        {
-          method: 'PUT',
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(todo),
-        }
-      );
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/todos/${id}`, {
+        method: 'PUT',
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(todo),
+      });
 
       if (res.status === 200) {
         const updatedTodo = await res.json();

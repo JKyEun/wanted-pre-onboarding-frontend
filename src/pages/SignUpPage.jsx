@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export default function SignUpPage() {
+  const { API_URL } = process.env;
   const navigate = useNavigate();
   const emailInput = useRef('');
   const passwordInput = useRef('');
@@ -31,14 +32,11 @@ export default function SignUpPage() {
     };
 
     try {
-      const res = await fetch(
-        'https://pre-onboarding-selection-task.shop/auth/signup',
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(account),
-        }
-      );
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/auth/signup`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(account),
+      });
 
       if (res.status === 201) {
         console.log('회원가입 성공');

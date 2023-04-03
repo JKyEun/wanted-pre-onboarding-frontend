@@ -31,14 +31,11 @@ export default function SignInPage() {
     };
 
     try {
-      const res = await fetch(
-        'https://pre-onboarding-selection-task.shop/auth/signin',
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(account),
-        }
-      );
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/auth/signin`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(account),
+      });
 
       if (res.status === 200) {
         const data = await res.text();

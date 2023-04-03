@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import TodoList from '../components/TodoList';
 
 export default function TodoListPage() {
+  const { API_URL } = process.env;
   const todoInput = useRef('');
   const [todos, setTodos] = useState([]);
   const navigate = useNavigate();
@@ -17,17 +18,14 @@ export default function TodoListPage() {
     const accessToken = JSON.parse(localStorage.getItem('JWT')).access_token;
 
     try {
-      const res = await fetch(
-        'https://pre-onboarding-selection-task.shop/todos',
-        {
-          method: 'POST',
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(todo),
-        }
-      );
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/todos`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(todo),
+      });
 
       if (res.status === 201) {
         const data = await res.json();
@@ -48,15 +46,12 @@ export default function TodoListPage() {
     const accessToken = JSON.parse(localStorage.getItem('JWT')).access_token;
 
     try {
-      const res = await fetch(
-        'https://pre-onboarding-selection-task.shop/todos',
-        {
-          method: 'GET',
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
-      );
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/todos`, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
 
       if (res.status === 200) {
         const data = await res.json();

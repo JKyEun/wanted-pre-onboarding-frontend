@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export default function SignInPage() {
+  const API_URL = 'https://www.pre-onboarding-selection-task.shop';
   const navigate = useNavigate();
   const emailInput = useRef('');
   const passwordInput = useRef('');
@@ -31,7 +32,7 @@ export default function SignInPage() {
     };
 
     try {
-      const res = await fetch(`${process.env.REACT_APP_API_URL}/auth/signin`, {
+      const res = await fetch(`${API_URL}/auth/signin`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(account),
@@ -42,9 +43,11 @@ export default function SignInPage() {
         localStorage.setItem('JWT', data);
         navigate('/todo');
       } else {
+        alert('로그인에 실패했습니다. 다시 시도해주세요.');
         console.log(`요청실패, status는 ${res.status}`);
       }
     } catch (err) {
+      alert('로그인에 실패했습니다. 다시 시도해주세요.');
       console.error(`요청실패, 에러는 ${err}`);
     }
   };

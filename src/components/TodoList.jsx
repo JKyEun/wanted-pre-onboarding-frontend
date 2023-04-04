@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 
 export default function TodoList({ id, todo, isCompleted, setTodos, todos }) {
-  const { API_URL } = process.env;
+  const API_URL = 'https://www.pre-onboarding-selection-task.shop';
   const checkBox = useRef();
   const todoSpan = useRef();
   const modifyInput = useRef('');
@@ -17,7 +17,7 @@ export default function TodoList({ id, todo, isCompleted, setTodos, todos }) {
     const accessToken = JSON.parse(localStorage.getItem('JWT')).access_token;
 
     try {
-      const res = await fetch(`${process.env.REACT_APP_API_URL}/todos/${id}`, {
+      const res = await fetch(`${API_URL}/todos/${id}`, {
         method: 'PUT',
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -42,7 +42,7 @@ export default function TodoList({ id, todo, isCompleted, setTodos, todos }) {
     const accessToken = JSON.parse(localStorage.getItem('JWT')).access_token;
 
     try {
-      const res = await fetch(`${process.env.REACT_APP_API_URL}/todos/${id}`, {
+      const res = await fetch(`${API_URL}/todos/${id}`, {
         method: 'DELETE',
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -70,7 +70,7 @@ export default function TodoList({ id, todo, isCompleted, setTodos, todos }) {
     const accessToken = JSON.parse(localStorage.getItem('JWT')).access_token;
 
     try {
-      const res = await fetch(`${process.env.REACT_APP_API_URL}/todos/${id}`, {
+      const res = await fetch(`${API_URL}/todos/${id}`, {
         method: 'PUT',
         headers: {
           Authorization: `Bearer ${accessToken}`,

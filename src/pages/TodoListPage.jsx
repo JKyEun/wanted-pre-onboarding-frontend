@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import TodoList from '../components/TodoList';
 
 export default function TodoListPage() {
-  const { API_URL } = process.env;
+  const API_URL = 'https://www.pre-onboarding-selection-task.shop';
   const todoInput = useRef('');
   const [todos, setTodos] = useState([]);
   const navigate = useNavigate();
@@ -18,7 +18,7 @@ export default function TodoListPage() {
     const accessToken = JSON.parse(localStorage.getItem('JWT')).access_token;
 
     try {
-      const res = await fetch(`${process.env.REACT_APP_API_URL}/todos`, {
+      const res = await fetch(`${API_URL}/todos`, {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -46,7 +46,7 @@ export default function TodoListPage() {
     const accessToken = JSON.parse(localStorage.getItem('JWT')).access_token;
 
     try {
-      const res = await fetch(`${process.env.REACT_APP_API_URL}/todos`, {
+      const res = await fetch(`${API_URL}/todos`, {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${accessToken}`,
